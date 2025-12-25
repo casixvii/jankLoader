@@ -81,4 +81,4 @@ function jankloader.loadMap()
 	jankloader.mapInfo.w10.s = file2:match("╦%[.-,.-,.-,.-,(.-)%]ú")
 end
 
-return chamberloader
+return jankloader
