@@ -26,7 +26,6 @@ end
 function jankloader.loadMap()
 	local file = io.open(jankloader.currentMap, "r")
 	local file2 = file:read()
-	file2 = file2:gsub("<%[[^%]]-%%]>", "") -- Comments have a format of <[comment]>
 	jankloader.mapInfo.et.x = file2:match("√[^%[]*%[([^,]+)") -- et is for End trigger.
 	jankloader.mapInfo.et.y = file2:match("√[^%[]*%[[^,]+,([^%]]+)%]█") -- Format is: √mapFile[x,y]█
 	
