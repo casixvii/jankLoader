@@ -21,15 +21,15 @@ function jankloader.loadMap()
 	local file2 = file:read()
 	-- print(file2)
 	jankloader.mapInfo.et.x = file2:match("b[^%[]*%[([^,]+)")
-	jankloader.mapInfo.et.y = file2:match("b[^%[]*%[[^,]+,([^%]]+)%]")
+	jankloader.mapInfo.et.y = file2:match("b[^%[]*%[[^,]+,([^%]]+)%]%$")
 	for wc = 1, 20 do
 		local val = string.char(wc+33)
-		jankloader.mapInfo.walls[wc] = {}
-		jankloader.mapInfo.walls[wc].t = file2:match("%".. val .."%[(.-),.-,.-,.-,.-%]")
-		jankloader.mapInfo.walls[wc].b = file2:match("%".. val .."%[.-,(.-),.-,.-,.-%]")
-		jankloader.mapInfo.walls[wc].l = file2:match("%".. val .."%[.-,.-,(.-),.-,.-%]")
-		jankloader.mapInfo.walls[wc].r = file2:match("%".. val .."%[.-,.-,.-,(.-),.-%]")
-		jankloader.mapInfo.walls[wc].s = file2:match("%".. val .."%[.-,.-,.-,.-,(.-)%]")
+		-- this is less jank:tm:y and will break any map files made before this
+		jankloader.mapInfo.walls[wc].t = file2:match("%".. val .."(.-) .- .- .- .-")
+		jankloader.mapInfo.walls[wc].b = file2:match("%".. val ..".- (.-) .- .- .-")
+		jankloader.mapInfo.walls[wc].l = file2:match("%".. val ..".- .- (.-) .- .-")
+		jankloader.mapInfo.walls[wc].r = file2:match("%".. val ..".- .- .- (.-) .-")
+		jankloader.mapInfo.walls[wc].r = file2:match("%".. val ..".- .- .- .- (.-)")
 	end
 	file:close()
 end
